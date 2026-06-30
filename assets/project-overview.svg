@@ -1,0 +1,92 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="520" viewBox="0 0 1200 520" role="img" aria-labelledby="title desc">
+  <title id="title">SAP reverse proxy add-on architecture overview</title>
+  <desc id="desc">A clean architecture overview showing browser traffic entering a local mitmproxy add-on and being routed to configurable SAP and identity-provider upstreams.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0f172a"/>
+      <stop offset="0.55" stop-color="#16324f"/>
+      <stop offset="1" stop-color="#0b4a5a"/>
+    </linearGradient>
+    <linearGradient id="panel" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#ffffff" stop-opacity="0.16"/>
+      <stop offset="1" stop-color="#ffffff" stop-opacity="0.08"/>
+    </linearGradient>
+    <linearGradient id="accent" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#38bdf8"/>
+      <stop offset="1" stop-color="#34d399"/>
+    </linearGradient>
+    <filter id="shadow" x="-18%" y="-22%" width="136%" height="148%">
+      <feDropShadow dx="0" dy="16" stdDeviation="18" flood-color="#020617" flood-opacity="0.30"/>
+    </filter>
+    <style>
+      .title { font: 700 34px Segoe UI, Arial, sans-serif; fill: #f8fafc; }
+      .subtitle { font: 400 17px Segoe UI, Arial, sans-serif; fill: #cbd5e1; }
+      .label { font: 700 20px Segoe UI, Arial, sans-serif; fill: #f8fafc; }
+      .small { font: 500 14px Segoe UI, Arial, sans-serif; fill: #cbd5e1; }
+      .code { font: 600 13px Consolas, monospace; fill: #e0f2fe; }
+      .chip { font: 700 12px Segoe UI, Arial, sans-serif; fill: #082f49; }
+      .flowLabel { font: 700 12px Segoe UI, Arial, sans-serif; fill: #dbeafe; }
+    </style>
+  </defs>
+
+  <rect width="1200" height="520" rx="28" fill="url(#bg)"/>
+  <path d="M0 430 C210 360 310 500 510 420 C715 337 815 360 990 295 C1085 260 1145 242 1200 252 L1200 520 L0 520 Z" fill="#0f766e" opacity="0.22"/>
+  <path d="M75 78 H1125" stroke="#ffffff" stroke-opacity="0.14"/>
+
+  <text x="72" y="56" class="title">SAP Reverse Proxy Add-on for mitmproxy</text>
+  <text x="72" y="101" class="subtitle">Local routing, header/body rewriting, and configurable SAP/identity-provider upstreams</text>
+
+  <g id="browser" filter="url(#shadow)">
+    <rect x="68" y="162" width="250" height="190" rx="22" fill="url(#panel)" stroke="#ffffff" stroke-opacity="0.18"/>
+    <rect x="94" y="190" width="198" height="122" rx="14" fill="#020617" stroke="#38bdf8" stroke-opacity="0.38"/>
+    <circle cx="118" cy="214" r="6" fill="#ef4444"/>
+    <circle cx="139" cy="214" r="6" fill="#f59e0b"/>
+    <circle cx="160" cy="214" r="6" fill="#22c55e"/>
+    <path d="M111 248 H268 M111 276 H218" stroke="#38bdf8" stroke-width="8" stroke-linecap="round" opacity="0.78"/>
+    <text x="96" y="340" class="label">Browser / HMI</text>
+    <text x="96" y="366" class="small">single local HTTPS origin</text>
+  </g>
+
+  <g id="addon" filter="url(#shadow)">
+    <rect x="456" y="132" width="288" height="250" rx="24" fill="#0f172a" stroke="url(#accent)" stroke-width="2"/>
+    <rect x="486" y="164" width="228" height="46" rx="23" fill="url(#accent)"/>
+    <text x="525" y="194" class="chip">MITMPROXY ADD-ON</text>
+    <text x="496" y="250" class="label">Route + Rewrite</text>
+    <text x="496" y="282" class="small">headers, cookies, locations</text>
+    <text x="496" y="308" class="small">HTML / JS / JSON / CSS / XML</text>
+    <text x="496" y="344" class="code">http2=false</text>
+    <text x="610" y="344" class="code">lazy connect</text>
+  </g>
+
+  <g id="upstreams" filter="url(#shadow)">
+    <rect x="892" y="143" width="240" height="114" rx="20" fill="url(#panel)" stroke="#ffffff" stroke-opacity="0.18"/>
+    <text x="922" y="190" class="label">SAP Upstream</text>
+    <text x="922" y="220" class="code">GB_MITM_S4_UPSTREAM</text>
+
+    <rect x="892" y="286" width="240" height="114" rx="20" fill="url(#panel)" stroke="#ffffff" stroke-opacity="0.18"/>
+    <text x="922" y="333" class="label">Identity Provider</text>
+    <text x="922" y="363" class="code">GB_MITM_IDP_*</text>
+  </g>
+
+  <g id="flows">
+    <rect x="344" y="254" width="82" height="6" rx="3" fill="#93c5fd"/>
+    <polygon points="426,238 450,257 426,276" fill="#93c5fd"/>
+    <rect x="348" y="224" width="78" height="24" rx="12" fill="#1e3a8a" stroke="#93c5fd" stroke-opacity="0.35"/>
+    <text x="362" y="241" class="flowLabel">local URL</text>
+
+    <path d="M774 226 C808 226 830 200 860 200 L884 200 L860 216 C830 216 808 238 774 238 Z" fill="#93c5fd"/>
+    <polygon points="856,178 884,200 856,222" fill="#93c5fd"/>
+    <rect x="780" y="166" width="66" height="24" rx="12" fill="#164e63" stroke="#67e8f9" stroke-opacity="0.35"/>
+    <text x="797" y="183" class="flowLabel">/s4</text>
+
+    <path d="M774 318 C808 318 830 343 860 343 L884 343 L860 327 C830 327 808 306 774 306 Z" fill="#93c5fd"/>
+    <polygon points="856,321 884,343 856,365" fill="#93c5fd"/>
+    <rect x="780" y="368" width="66" height="24" rx="12" fill="#14532d" stroke="#86efac" stroke-opacity="0.35"/>
+    <text x="796" y="385" class="flowLabel">/idp</text>
+  </g>
+
+  <g transform="translate(72 436)">
+    <rect width="1056" height="44" rx="22" fill="#ffffff" fill-opacity="0.1" stroke="#ffffff" stroke-opacity="0.14"/>
+    <text x="28" y="28" class="small">No tenant names, internal domains, certificates, keys, logs, virtualenvs, or build outputs are stored in the repository.</text>
+  </g>
+</svg>
